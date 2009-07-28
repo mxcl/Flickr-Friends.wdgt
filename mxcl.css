@@ -5,12 +5,7 @@ body {
 }
 
 a {
-    color: #000;
-    text-decoration: none;
-}
-
-a:link:hover {
-    text-decoration: underline;
+    color: black;
 }
 
 #polaroid {
@@ -22,6 +17,14 @@ a:link:hover {
     padding: 12px;
     margin: 13px;
     padding-bottom: 9px;
+}
+
+#polaroid a {
+  text-decoration: none;
+}
+
+#polaroid a:link:hover {
+    text-decoration: underline;
 }
 
 #image {
@@ -36,7 +39,7 @@ a:link:hover {
     text-align: center;
 }
 
-#title {
+#title {    
     font-size: 12pt;
     font-family: "Handwriting - Dakota";
 }
@@ -59,4 +62,64 @@ a:link:hover {
     font-size: 8pt;
     font-family: "Courier";
     color: #aaa;
+}
+
+#back {
+    margin: auto;
+    -webkit-box-shadow: 0px 5px 20px rgba(0,0,0,0.68);
+    -webkit-border-radius: 5px;
+    width: 200px;
+    height: 227px;
+    padding: 12px;
+    background-color: white;
+    color: black;
+    display: none;
+    position: relative;
+}
+
+#blackback {
+    color: white;
+    background:-webkit-gradient(linear, left top, left bottom, from(#000), to(#222));
+    -webkit-border-radius: 2px;
+    padding: 16px;
+    width: 168px;
+    height: 158px;
+    position: relative;
+}
+
+#about {
+    margin-bottom: 16px;
+    text-align: justify;
+}
+
+#labeltext {
+    font-family: "Helvetica New";
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+#copyright {
+    position: absolute;
+    font-size: 8pt;
+    bottom: 10px;
+    left: 0;
+    width: 228px;
+    clear: both;
+    text-align: center;
+}
+
+input {
+    width: 162px;
+}
+
+#infobutton {
+    position:absolute;
+    bottom:15px;
+    right:14px;
+}
+
+#donebutton {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
 }

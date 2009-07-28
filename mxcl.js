@@ -3,6 +3,15 @@ function $(name)
     return document.getElementById(name);
 }
 
+function json(method, other_params)
+{
+    var url = "http://api.flickr.com/services/rest/?method="+method+"&format=json&api_key=2c4f0eb3f21b15c9cbae940f22a98d57&"+other_params;
+    var script = document.createElement("script");
+    script.setAttribute("src", url);
+    script.setAttribute("type", "text/javascript");
+    document.body.appendChild(script);
+}
+
 var photos = [];
 var timer = null;
 var fetch_timer = null;
@@ -27,8 +36,25 @@ function got_photo(p)
     return false;
 }
 
+function findByUsername(json)
+{
+    if (json.stat == "fail")
+        $('title').innerText = json.message;
+    else {
+        if (window.widget)
+            widget.setPreferenceForKey(json.user.nsid, "UserId");
+        photos.length = 0;
+        fetch();
+    }
+}
+
 function jsonFlickrApi(json)
 {
+    if (json.stat == "fail") {
+        $('title').innerText = json.message;
+        return;
+    }
+
     var was_first_time = photos.length == 0;
     
     for (var i = 0; i < json.photos.photo.length; i++) {
@@ -73,18 +99,18 @@ function set_new_photo()
 
 function fetch()
 {
+    var uid = window.widget.preferenceForKey("UserId");
+    if (!uid || uid.length <= 0) return;
+    
     last_fetch = new Date().getTime();
     
-    var url = 'http://api.flickr.com/services/rest/?method=flickr.photos.getContactsPublicPhotos&format=json&api_key=2c4f0eb3f21b15c9cbae940f22a98d57&user_id=73643601@N00&just_friends=1&extras=date_taken';
+    var params = 'user_id='+uid+'&just_friends=1&extras=date_taken';
     
     // if this is the first time, get 50 photos
     if (photos.length == 0)
-        url += '&count=50';
+        params += '&count=50';
     
-    var script = document.createElement("script");
-    script.setAttribute("src", url);
-    script.setAttribute("type", "text/javascript");
-    document.body.appendChild(script);
+    json("flickr.photos.getContactsPublicPhotos", params);
 }
 
 function show()
@@ -109,4 +135,42 @@ function hide()
 if (window.widget) {
     widget.onshow = show;
     widget.onhide = hide;
+}
+
+
+function setup()
+{
+    new AppleGlassButton($("donebutton"), "Done", hidePrefs);
+    new AppleInfoButton($("infobutton"), $("polaroid"), "black", "black", showPrefs);
+}
+
+function showPrefs()
+{
+    if (window.widget) {
+        widget.prepareForTransition("ToBack");
+        var username = widget.preferenceForKey("Username");
+        if (username) $('username').value = username;
+    }
+ 
+    $('polaroid').style.display="none";
+    $('back').style.display="block";
+ 
+    if (window.widget)
+        setTimeout('widget.performTransition();', 0);
+}
+
+function hidePrefs()
+{
+    var username = $('username').value;
+    if (username && username.length > 0 && username != window.widget.preferenceForKey("Username")) {
+        widget.setPreferenceForKey(username, "Username");
+        json("flickr.people.findByUsername", "jsoncallback=findByUsername&username="+username);
+    }
+    widget.prepareForTransition("ToFront");
+
+    $('back').style.display="none";
+    $('polaroid').style.display="block";
+ 
+    if (window.widget)
+        setTimeout('widget.performTransition();', 0);
 }

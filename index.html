@@ -4,15 +4,27 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="mxcl.css">
     <script src="mxcl.js" type="text/javascript" charset="utf-8"></script>
+    <script src='/System/Library/WidgetResources/AppleClasses/AppleInfoButton.js' type='text/javascript' charset='utf-8'></script>
+    <script src='/System/Library/WidgetResources/AppleClasses/AppleAnimator.js' type='text/javascript' charset='utf-8'></script>
+    <script src='/System/Library/WidgetResources/AppleClasses/AppleButton.js' type='text/javascript' charset='utf-8'></script>
   </head>
-  <body>
+  <body onload='setup();'>
     <div id="polaroid">
       <div id="clipwrapper">
         <img id="image" src="http://plant-disease.ippc.orst.edu/plant_images/ryegrass_stripe_rust.jpg">
         <div id="date"></div>
       </div>
       <div id="text"><a id="title">Flickr Friends</a><span id="owner"> Owner</span></div>
-      
+      <div id='infobutton'></div>
+    </div>
+    <div id="back">
+      <div id="blackback">
+        <div id="about">This widget shows a slideshow of your <span style='color:#0063dc;font-family:"Arial";font-weight:bold'>flick<span style='color:#ff0084'>r</span></span> friends' recently uploaded pictures.</div>
+        <div id='labeltext'>Flickr Screen Name:</div>
+        <input id='username' value=''/>
+        <div id="donebutton"></div>
+      </div>
+      <div id="copyright">You should follow me on Twitter <a href='javascript:window.widget.openURL("http://twitter.com/mxcl");return false;'>here</a>.</div>
     </div>
   </body>
 </html>
