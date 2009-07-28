@@ -15,15 +15,15 @@
     	<key>CFBundleVersion</key>
     	<string>1.0</string>
     	<key>CloseBoxInsetX</key>
-    	<integer>22</integer>
+    	<integer>11</integer>
     	<key>CloseBoxInsetY</key>
-    	<integer>17</integer>
+    	<integer>18</integer>
     	<key>Height</key>
-    	<integer>232</integer>
+    	<integer>314</integer>
     	<key>MainHTML</key>
     	<string>index.html</string>
     	<key>Width</key>
-    	<integer>232</integer>
+    	<integer>266</integer>
     	<key>AllowNetworkAccess</key>
     	<true/>
     </dict>

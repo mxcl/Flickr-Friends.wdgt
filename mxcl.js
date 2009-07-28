@@ -19,10 +19,11 @@ function start_timers()
 
 function got_photo(p)
 {
-    for (var i = 0; i < photos.length; i++)
+    for (var i = 0; i < photos.length; i++) {
         // not sure how unique this is
         if (p.id == photos[i].id)
             return true;
+    }
     return false;
 }
 
@@ -59,10 +60,11 @@ function set_new_photo()
         ii = 0;
 
     var p = photos[ii++];
-    $('image').style.backgroundImage = 'url('+image_url(p)+')';
+    $('image').src = image_url(p);
     $('title').innerHTML = p.title;
     $('title').href = "javascript:window.widget.openURL('http://www.flickr.com/photos/"+p.owner+'/'+p.id+"');return false;";
-    $('owner').innerHTML = p.username;
+    $('owner').innerHTML = ' '+p.username.replace(' ', '&nbsp;');
+    $('date').innerText = p.datetaken;
 
     // preload next image
     img = new Image();
@@ -73,7 +75,7 @@ function fetch()
 {
     last_fetch = new Date().getTime();
     
-    var url = 'http://api.flickr.com/services/rest/?method=flickr.photos.getContactsPublicPhotos&format=json&api_key=2c4f0eb3f21b15c9cbae940f22a98d57&user_id=73643601@N00&just_friends=1';
+    var url = 'http://api.flickr.com/services/rest/?method=flickr.photos.getContactsPublicPhotos&format=json&api_key=2c4f0eb3f21b15c9cbae940f22a98d57&user_id=73643601@N00&just_friends=1&extras=date_taken';
     
     // if this is the first time, get 50 photos
     if (photos.length == 0)
