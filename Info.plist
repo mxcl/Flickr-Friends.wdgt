@@ -10,20 +10,14 @@
     	<string>com.methylblue.Flickr Friends</string>
     	<key>CFBundleName</key>
     	<string>Flickr Friends</string>
-    	<key>CFBundleShortVersionString</key>
-    	<string>1.0</string>
     	<key>CFBundleVersion</key>
-    	<string>1.0</string>
+    	<string>1.1</string>
     	<key>CloseBoxInsetX</key>
     	<integer>11</integer>
     	<key>CloseBoxInsetY</key>
     	<integer>18</integer>
-    	<key>Height</key>
-    	<integer>314</integer>
     	<key>MainHTML</key>
     	<string>index.html</string>
-    	<key>Width</key>
-    	<integer>266</integer>
     	<key>AllowNetworkAccess</key>
     	<true/>
     </dict>
